@@ -1,10 +1,13 @@
 const jwt = require("jsonwebtoken");
+const userModel = require("../models/user-model");
 
-module.exports.isLoggendIn = function (req,res,next){
-    if(req,cookies.token){
+
+module.exports.isLoggendIn = async function (req,res,next){
+    if(req.cookies.token){
     try{
-        let decode =jwt.verify(req,cookies.token,process.env.JWT_KEY);
-        req.user = decode;
+        let decode =jwt.verify(req.cookies.token,process.env.JWT_KEY);
+        let user = await userModel.findOne({email:decode.email});
+        req.user = user;
         next();
     }
     catch(error){
@@ -16,11 +19,17 @@ module.exports.isLoggendIn = function (req,res,next){
     }
 };
 
-module.exports.redirectToProfile = function (req,res,next){
+module.exports.redirectIfLoggedIn = function (req,res,next){
     if(req.cookies.token){
-        jwt.verify(req.cookies.token,process.env.JWT_KEY);
+        try{
+            jwt.verify(req.cookies.token,process.env.JWT_KEY);
+            res.redirect("/profile");
+        }
+        catch(err){
+            return next();
+        }
     }
     else{
         next()
     }
-} 
+};

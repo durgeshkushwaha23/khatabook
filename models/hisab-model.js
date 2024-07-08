@@ -38,6 +38,6 @@ const hisaabSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-const Hisaab = mongoose.model("Hisaab", hisaabSchema);
+const hisaab = mongoose.model("hisaab", hisaabSchema);
 
-module.exports = Hisaab;
+module.exports = hisaab;

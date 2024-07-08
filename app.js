@@ -5,6 +5,8 @@ const path = require("path");
 const cookieParse = require("cookie-parser")
 
 const indexRounter = require("./routes/index-router")
+const hisaabRounter = require("./routes/hisaab-router")
+
 const db = require('./config/mongoose-connection')
 
 app.set("view engine","ejs");
@@ -14,5 +16,7 @@ app.use(cookieParse());
 
 
 app.use("/",indexRounter);
+app.use("/hisaab",hisaabRounter);
+
 
 app.listen(3000)

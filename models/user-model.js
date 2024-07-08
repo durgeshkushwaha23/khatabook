@@ -32,9 +32,12 @@ name: {
       },
       password: {
         type: String,
-        // required: [false, 'Password is required'],
-        // minlength: [8, 'Password must be at least 8 characters long'],
-        // maxlength: [128, 'Password cannot be more than 128 characters long']
+        required: [false, 'Password is required'],
+        minlength: [8, 'Password must be at least 8 characters long'],
+        maxlength: [128, 'Password cannot be more than 128 characters long',
+          
+        ],
+        // select:false
       },
     hisaab:[{
         type:mongoose.Schema.Types.ObjectId, ref:"hisaab"

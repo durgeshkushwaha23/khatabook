@@ -7,11 +7,12 @@ registerController,
 logincontrollers,
 logoutControllers,
 profileController
-} = require("../controllers/index.controller");
 
-const {isLoggendIn} = require("../middlewares/auth-middlewares")
+} = require("../controllers/index-controller");
 
-router.get("/", landingPageController);
+const {isLoggendIn,redirectIfLoggedIn} = require("../middlewares/auth-middlewares")
+
+router.get("/",redirectIfLoggedIn, landingPageController);
 router.get("/register", registerPageController);
 router.get("/logout", logoutControllers);
 router.get("/profile",isLoggendIn, profileController);

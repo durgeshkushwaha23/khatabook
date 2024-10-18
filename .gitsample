@@ -1,0 +1,2 @@
+MONGO_DB_URI = "your url"
+JWT_KEY = "your key"
